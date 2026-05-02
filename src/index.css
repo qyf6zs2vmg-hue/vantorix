@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #fbf5f2;
+  --color-brand-100: #eedcd3;
+  --color-brand-200: #dfbaab;
+  --color-brand-300: #d19983;
+  --color-brand-400: #c67d61;
+  --color-brand-500: #b85b3f;
+  --color-brand-600: #a74b30;
+  --color-brand-700: #8a3a22;
+  --color-brand-800: #71301e;
+  --color-brand-900: #5d281a;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Inter', sans-serif;
+  background-color: #fafaf9;
+  color: #1c1917;
+}
+
+body {
+  overflow-x: hidden;
+  @apply antialiased bg-stone-50 text-stone-900;
+}
+
+::selection {
+  @apply bg-brand-200 text-brand-900;
+}
+
+.glass {
+  @apply bg-white/70 backdrop-blur-md border border-stone-200;
+}
+
+.glass-card {
+  @apply bg-white border border-stone-200 hover:border-brand-300 hover:shadow-xl transition-all duration-300 shadow-sm rounded-[2rem];
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-br from-stone-900 to-stone-600;
+}
+
+.text-gradient-brand {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400;
+}
