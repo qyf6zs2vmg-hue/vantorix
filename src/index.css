@@ -16,31 +16,17 @@
 html {
   scroll-behavior: smooth;
   font-family: 'Inter', sans-serif;
-  background-color: #fafaf9;
-  color: #1c1917;
+  background-color: #F8F8F7;
+  color: #1C1917;
 }
 
 body {
   overflow-x: hidden;
-  @apply antialiased bg-stone-50 text-stone-900;
+  @apply antialiased bg-[#F8F8F7] text-stone-900;
 }
 
 ::selection {
-  @apply bg-brand-200 text-brand-900;
+  @apply bg-[#F3EBE6] text-[#C25B3A];
 }
 
-.glass {
-  @apply bg-white/70 backdrop-blur-md border border-stone-200;
-}
 
-.glass-card {
-  @apply bg-white border border-stone-200 hover:border-brand-300 hover:shadow-xl transition-all duration-300 shadow-sm rounded-[2rem];
-}
-
-.text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-br from-stone-900 to-stone-600;
-}
-
-.text-gradient-brand {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-400;
-}
