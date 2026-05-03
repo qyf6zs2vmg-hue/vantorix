@@ -449,7 +449,7 @@ function ProductsPage() {
                 Наши продукты
               </div>
               <h1 className="text-4xl md:text-6xl font-black text-stone-900 tracking-tight mb-6">
-                Готовые системы
+                Готовые системы Vantorix
               </h1>
               <p className="text-xl text-stone-500 max-w-2xl mx-auto leading-relaxed">
                 Собственные разработки и платформы для интеграции в B2B-среду.
@@ -641,7 +641,7 @@ function PrivacyPage() {
         <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-[#C25B3A]/5 rounded-full blur-[100px] pointer-events-none translate-x-1/2 -translate-y-1/2" />
         
         <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="relative z-10">
-          <h1 className="text-4xl md:text-5xl font-black text-stone-900 mb-4 tracking-tight">Политика конфиденциальности</h1>
+          <h1 className="text-4xl md:text-5xl font-black text-stone-900 mb-4 tracking-tight">Политика конфиденциальности Vantorix</h1>
           <p className="text-stone-500 mb-12">Дата вступления в силу: [03.05.2026]</p>
 
           <div className="prose prose-stone prose-lg max-w-none text-stone-700">
@@ -720,7 +720,7 @@ function TermsPage() {
         <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-stone-300/20 rounded-full blur-[100px] pointer-events-none translate-x-1/2 -translate-y-1/2" />
         
         <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="relative z-10">
-          <h1 className="text-4xl md:text-5xl font-black text-stone-900 mb-4 tracking-tight">Условия оказания услуг</h1>
+          <h1 className="text-4xl md:text-5xl font-black text-stone-900 mb-4 tracking-tight">Условия оказания услуг Vantorix</h1>
           <p className="text-stone-500 mb-12">Дата вступления в силу: [03.05.2026]</p>
 
           <div className="prose prose-stone prose-lg max-w-none text-stone-700">
