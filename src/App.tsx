@@ -18,7 +18,8 @@ import {
   Workflow,
   Cpu,
   Layers,
-  Terminal
+  Terminal,
+  ChevronDown
 } from 'lucide-react';
 
 const fadeInUp = {
@@ -55,36 +56,32 @@ export default function App() {
   }, [currentView]);
 
   return (
-    <div className="min-h-screen flex flex-col font-sans text-theme-primary relative selection:bg-[#5B5EF7]/20 selection:text-white bg-theme-bg">
+    <div className="min-h-screen flex flex-col font-sans text-theme-primary relative selection:bg-[#5B5EF7]/20 selection:text-white bg-theme-bg overflow-x-hidden">
       
-      {/* Dynamic Light Background Content */}
-      <div className="fixed inset-0 z-[-1] pointer-events-none overflow-hidden bg-gradient-to-b from-white to-[#F0F4F8]">
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.03]" />
+      {/* Background elements */}
+      <div className="fixed inset-0 z-[-1] pointer-events-none overflow-hidden bg-white">
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.05]" />
         <motion.div 
           style={{ y: yBackground }}
-          className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-[#5B5EF7]/[0.06] blur-[100px] animate-blob mix-blend-multiply" 
+          className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-[#5B5EF7]/5 blur-[120px] animate-blob" 
         />
         <motion.div 
           style={{ y: yBackground }}
-          className="absolute top-1/3 right-1/4 w-[500px] h-[500px] rounded-full bg-[#22D3EE]/[0.06] blur-[120px] animate-blob animation-delay-2000 mix-blend-multiply" 
-        />
-        <motion.div 
-          style={{ y: yBackground }}
-          className="absolute bottom-1/4 left-1/3 w-[550px] h-[550px] rounded-full bg-[#A78BFA]/[0.06] blur-[100px] animate-blob animation-delay-4000 mix-blend-multiply" 
+          className="absolute top-[20%] right-[-10%] w-[35%] h-[35%] rounded-full bg-[#22D3EE]/5 blur-[120px] animate-blob" 
         />
       </div>
 
       {/* Navigation */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 h-[64px] flex items-center ${isScrolled ? "nav-blur shadow-theme-sm border-b border-theme" : "bg-transparent"}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-[72px] flex items-center ${isScrolled ? "nav-blur shadow-sm border-b border-theme/50" : "bg-transparent"}`}>
         <div className="w-full max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <div onClick={() => setCurrentView('home')} className="flex items-center gap-3 cursor-pointer group">
-            <div className="w-10 h-10 radius-ui bg-[#5B5EF7]/10 flex items-center justify-center text-gradient font-bold text-xl shadow-theme-sm border border-theme group-hover:bg-[#5B5EF7] group-hover:text-white transition-all duration-300">
+          <div onClick={() => setCurrentView('home')} className="flex items-center gap-2.5 cursor-pointer group">
+            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#5B5EF7] to-[#22D3EE] flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-[#5B5EF7]/20 transition-all duration-300 group-hover:scale-110">
               V
             </div>
-            <span className="font-bold text-2xl tracking-tight text-theme-primary">Vantorix</span>
+            <span className="font-bold text-xl tracking-tight text-theme-primary">Vantorix</span>
           </div>
           
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-theme-secondary">
+          <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-theme-secondary">
             {currentView === 'home' && (
               <>
                 <a href="#about" className="hover:text-theme-primary transition-colors">О нас</a>
@@ -94,14 +91,14 @@ export default function App() {
             )}
             <button 
               onClick={() => setCurrentView('products')} 
-              className={`${currentView === 'products' ? 'text-[#5B5EF7] font-bold' : 'hover:text-theme-primary'} transition-all`}
+              className={`${currentView === 'products' ? 'text-[#5B5EF7]' : 'hover:text-theme-primary'} transition-all`}
             >
               Продукты
             </button>
           </div>
           
           <div className="hidden md:block">
-            <a href="#contact" className="btn-primary px-6 py-2.5 text-sm font-medium shadow-theme-md">
+            <a href="#contact" className="btn-primary px-5 py-2.5 text-sm">
               Связаться
             </a>
           </div>
@@ -181,70 +178,47 @@ export default function App() {
       </main>
 
       {/* КАРТОЧКА КОНТАКТОВ & АНИМАЦИЯ */}
-      <section id="contact" className="py-32 px-6 relative border-t border-theme overflow-hidden bg-theme-card">
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[500px] bg-[#F6F7FB]/50 radius-btn blur-[150px] pointer-events-none" />
+      <section id="contact" className="py-32 px-6 relative border-t border-theme overflow-hidden bg-white">
+        <div className="absolute top-0 right-0 w-[40%] h-[40%] bg-[#5B5EF7]/5 blur-[100px] rounded-full" />
         
         <div className="max-w-4xl mx-auto flex flex-col items-center text-center relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mb-20 w-full"
+              className="mb-16 w-full"
             >
-              <div className="w-20 h-20 bg-[#F6F7FB] border border-theme text-[#5B5EF7] radius-card flex items-center justify-center mx-auto mb-8 shadow-theme-sm">
-                <Send className="w-8 h-8" />
+              <div className="w-16 h-16 bg-slate-50 border border-theme text-[#5B5EF7] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
+                <Send className="w-7 h-7" />
               </div>
-              <h2 className="text-4xl md:text-5xl font-black text-theme-primary mb-6 tracking-tight">Начать работу с технологиями</h2>
+              <h2 className="text-4xl md:text-5xl font-black text-theme-primary mb-6 tracking-tight leading-tight">Готовы к <span className="text-gradient">цифровой трансформации?</span></h2>
               <p className="text-theme-secondary mb-10 max-w-xl mx-auto text-lg leading-relaxed">
-                Свяжитесь с нами напрямую для экспертной консультации и обсуждения процессов внедрения систем в ваш бизнес.
+                Оставьте заявку, чтобы обсудить внедрение наших продуктов или разработку индивидуального решения для вашего бизнеса.
               </p>
 
-              <div className="mt-8 flex justify-center">
+              <div className="flex justify-center mt-4">
                 <a 
                   href="https://t.me/vantorix_os" target="_blank" rel="noreferrer"
-                  className="inline-flex items-center gap-3 bg-[#1C1917] hover:bg-stone-800 text-white px-10 py-5 radius-card font-bold transition-all shadow-theme-md hover:shadow-theme-lg hover:-translate-y-1 text-lg group"
+                  className="btn-primary px-10 py-5 text-xl flex items-center gap-3"
                 >
-                  Связаться в Telegram <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  Связаться в Telegram <ArrowRight className="w-6 h-6" />
                 </a>
               </div>
             </motion.div>
 
             {/* BRAND POWER ANIMATION CARD */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.98 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="w-full bg-theme-bg border border-theme rounded-[3rem] p-12 md:p-20 relative overflow-hidden shadow-theme-sm"
+              className="w-full bg-slate-50 border border-theme rounded-[2rem] p-10 md:p-16 relative overflow-hidden shadow-sm"
             >
-              <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                {[...Array(15)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute bg-[#A78BFA]/10 radius-btn blur-[20px]"
-                    style={{
-                      width: Math.random() * 100 + 50,
-                      height: Math.random() * 100 + 50,
-                      left: `${Math.random() * 100}%`,
-                      top: `${Math.random() * 100}%`,
-                    }}
-                    animate={{
-                      y: [0, -50, 0],
-                      opacity: [0.1, 0.4, 0.1],
-                      scale: [1, 1.2, 1]
-                    }}
-                    transition={{
-                      duration: Math.random() * 5 + 5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  />
-                ))}
-              </div>
-
               <div className="relative z-10 flex flex-col items-center justify-center text-center">
-                <h3 className="text-3xl md:text-5xl lg:text-6xl font-black text-theme-primary tracking-widest uppercase mb-4 leading-tight">
-                  <span className="block text-[#5B5EF7] mb-4 font-black text-2xl tracking-[0.3em]">VANTORIX</span>
-                  MAKE IT <span className="text-theme-secondary font-light">POSSIBLE</span>
+                <div className="mb-6">
+                  <span className="text-[#5B5EF7] font-black text-sm tracking-[0.4em] uppercase">Vantorix Labs</span>
+                </div>
+                <h3 className="text-3xl md:text-5xl font-black text-theme-primary tracking-tight leading-tight mb-2">
+                  MAKE IT <span className="text-gradient">POSSIBLE</span>
                 </h3>
               </div>
             </motion.div>
@@ -252,17 +226,18 @@ export default function App() {
       </section>
 
       {/* FOOTER */}
-      <footer className="py-8 bg-theme-card border-t border-theme relative z-10">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
-          <div className="flex items-center gap-2">
-            <span className="font-bold text-theme-primary text-lg tracking-wider">VANTORIX</span>
+      <footer className="py-12 bg-white border-t border-theme relative z-10">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex items-center gap-3">
+            <div className="w-7 h-7 bg-gradient-to-br from-[#5B5EF7] to-[#22D3EE] rounded flex items-center justify-center text-white font-bold text-xs">V</div>
+            <span className="font-bold text-theme-primary text-xl tracking-tight">Vantorix</span>
           </div>
-          <div className="text-sm text-theme-secondary flex flex-wrap justify-center gap-6">
-            <button onClick={() => setCurrentView('privacy')} className="hover:text-theme-primary transition-colors text-left">Политика конфиденциальности</button>
-            <button onClick={() => setCurrentView('terms')} className="hover:text-theme-primary transition-colors text-left">Условия оказания услуг</button>
+          <div className="text-sm text-theme-secondary flex flex-wrap justify-center gap-8">
+            <button onClick={() => setCurrentView('privacy')} className="hover:text-[#5B5EF7] transition-colors">Конфиденциальность</button>
+            <button onClick={() => setCurrentView('terms')} className="hover:text-[#5B5EF7] transition-colors">Условия</button>
           </div>
-          <div className="text-sm text-theme-secondary font-mono">
-            &copy; {new Date().getFullYear()} Vantorix Labs.
+          <div className="text-sm text-theme-secondary font-medium">
+            &copy; {new Date().getFullYear()} Vantorix Labs. All rights reserved.
           </div>
         </div>
       </footer>
@@ -283,10 +258,6 @@ function HomePage({ onViewProducts }: { onViewProducts: () => void }) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="mx-auto bg-white/50 backdrop-blur-md rounded-full border border-white/60 shadow-[0_4px_16px_rgba(0,0,0,0.02)] px-4 py-2 flex items-center justify-center w-max mb-8 relative z-20">
-              <span className="w-2 h-2 rounded-full bg-[#22D3EE] mr-2 shadow-[0_0_8px_rgba(34,211,238,0.6)]"></span>
-              <span className="text-sm font-medium text-theme-secondary">Now in General Availability · v3.0</span>
-            </div>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.05] mb-8 text-theme-primary">
               Vantorix — Цифровые системы <br className="hidden lg:block"/>
               <span className="text-gradient">для роста бизнеса.</span>
@@ -306,31 +277,16 @@ function HomePage({ onViewProducts }: { onViewProducts: () => void }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="flex flex-col items-center justify-center gap-4 mt-8 w-full max-w-sm mx-auto"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10 w-full max-w-md mx-auto"
           >
-            <button onClick={onViewProducts} className="w-full bg-[#111827] text-white hover:bg-[#1a2333] px-8 py-4 radius-btn font-semibold transition-all flex items-center justify-center gap-2 group shadow-theme-md border border-[rgba(255,255,255,0.1)]">
+            <button onClick={onViewProducts} className="w-full sm:w-auto btn-primary px-10 py-4 text-lg min-w-[200px] flex items-center justify-center gap-2 group">
               Наши продукты <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
-            <a href="#services" className="w-full bg-white/40 backdrop-blur-md border border-white/60 hover:bg-white/60 text-theme-primary px-8 py-4 radius-btn font-semibold transition-all flex items-center justify-center gap-2 shadow-[0_4px_16px_rgba(0,0,0,0.03)]">
+            <a href="#services" className="w-full sm:w-auto btn-secondary px-10 py-4 text-lg min-w-[200px] flex items-center justify-center gap-2">
               Решения
             </a>
           </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="mt-16 flex items-center justify-center gap-4 text-theme-secondary text-sm font-medium"
-          >
-            <div className="flex -space-x-2">
-              {['A', 'B', 'C', 'D'].map((letter, i) => (
-                <div key={i} className={`w-8 h-8 rounded-full border border-white/80 bg-white/60 backdrop-blur-sm flex items-center justify-center text-[10px] font-bold shadow-sm z-[${4-i}]`} style={{ color: ['#5B5EF7', '#22D3EE', '#A78BFA', '#94A3B8'][i] }}>
-                  {letter}
-                </div>
-              ))}
-            </div>
-            <span className="text-[#64748B]">Trusted by 2,400+ enterprise teams</span>
-          </motion.div>
+
         </div>
       </section>
 
@@ -430,20 +386,153 @@ function HomePage({ onViewProducts }: { onViewProducts: () => void }) {
 }
 
 // --- PRODUCTS PAGE COMPONENT ---
+
+const productsData = [
+  {
+    id: 'orderly',
+    name: 'Orderly',
+    tag: 'Флагман',
+    subtitle: 'A modern B2B client ordering system',
+    shortDesc: 'Универсальная система заказов B2B для бизнеса и его клиентов.',
+    desc: 'Избавьтесь от ручной обработки заказов, хаоса в WhatsApp и Excel. Orderly обеспечивает централизованное управление, структурированный каталог и быстрый интерфейс связи бизнеса со своими клиентами.',
+    link: 'https://orderly-by-vantorix.vercel.app/',
+    features: [
+      { icon: <Users className="w-5 h-5 text-[#5B5EF7]" />, text: 'Приватный доступ клиентов (invite-система)' },
+      { icon: <ShoppingBag className="w-5 h-5 text-[#5B5EF7]" />, text: 'Структурированный каталог товаров' },
+      { icon: <Terminal className="w-5 h-5 text-[#5B5EF7]" />, text: 'Создание и трекинг заказов' },
+      { icon: <LayoutDashboard className="w-5 h-5 text-[#5B5EF7]" />, text: 'Дашборд для владельца бизнеса' },
+      { icon: <Users className="w-5 h-5 text-[#5B5EF7]" />, text: 'Многоклиентская среда управления' },
+      { icon: <LinkIcon className="w-5 h-5 text-[#5B5EF7]" />, text: 'Интеграция с Bitrix24 (CRM)' }
+    ],
+    integration: {
+      title: 'Синхронизация с Bitrix24',
+      desc: 'Заказы и клиенты автоматически синхронизируются с CRM системами бизнеса для непрерывного сквозного контроля.'
+    },
+    howItWorks: [
+      'Владелец бизнеса создает рабочую среду',
+      'Генерирует приватную invite-ссылку',
+      'Отправляет клиенту для регистрации',
+      'Клиент видит товары и размещает заказ',
+      'Бизнес моментально получает заказ на обработку'
+    ]
+  }
+];
+
+function ProductCard({ product }: { product: typeof productsData[0], key?: string | number }) {
+  const [expanded, setExpanded] = React.useState(false);
+
+  return (
+    <div className="bg-white rounded-[1.5rem] border border-theme shadow-sm relative overflow-hidden mb-8 transition-all duration-300 group hover:shadow-lg hover:border-[#5B5EF7]/30">
+      <div className="p-8 md:p-12 flex flex-col md:flex-row gap-8 justify-between items-start md:items-center relative z-10">
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
+          <div className="w-16 h-16 rounded-xl bg-slate-50 flex items-center justify-center shadow-sm shrink-0 border border-theme relative overflow-hidden">
+            <span className="font-bold text-2xl text-transparent bg-clip-text bg-gradient-to-r from-[#5B5EF7] to-[#22D3EE] relative z-10">{product.name.charAt(0)}</span>
+          </div>
+          <div>
+            <div className="mb-2">
+              <span className="bg-slate-100 text-[#5B5EF7] px-2.5 py-0.5 rounded-full font-bold tracking-tight text-[11px] uppercase border border-[#5B5EF7]/20 shadow-sm">{product.tag}</span>
+            </div>
+            <h2 className="text-2xl md:text-3xl font-black text-theme-primary mb-1">
+              {product.name}
+            </h2>
+            <p className="text-theme-secondary font-medium text-sm md:text-base max-w-xl">
+              {product.shortDesc}
+            </p>
+          </div>
+        </div>
+        
+        <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto shrink-0 mt-4 md:mt-0">
+          <a 
+            href={product.link} target="_blank" rel="noreferrer"
+            className="btn-primary px-6 py-2.5 text-sm inline-flex items-center justify-center gap-2"
+          >
+            Посмотреть <ExternalLink className="w-4 h-4" />
+          </a>
+          <button 
+            onClick={() => setExpanded(!expanded)}
+            className="btn-secondary px-6 py-2.5 text-sm inline-flex items-center justify-center gap-2"
+          >
+            {expanded ? 'Скрыть детали' : 'Подробнее'}
+            <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`} />
+          </button>
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {expanded && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="border-t border-theme/50"
+          >
+            <div className="p-8 md:p-12 bg-slate-50/30">
+              <h3 className="text-[#5B5EF7] font-bold tracking-widest uppercase text-[11px] mb-6">{product.subtitle}</h3>
+              <p className="text-base text-theme-secondary leading-relaxed mb-10 max-w-3xl">
+                {product.desc}
+              </p>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <div>
+                  <h4 className="text-lg font-bold text-theme-primary mb-5">Ключевые функции</h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {product.features.map((feat, i) => (
+                      <div key={i} className="flex gap-3">
+                        <div className="shrink-0 mt-0.5 text-[#5B5EF7]">{feat.icon}</div>
+                        <span className="text-theme-secondary text-sm">{feat.text}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <h4 className="text-lg font-bold text-theme-primary mt-10 mb-5">Интеграция</h4>
+                  <div className="bg-white p-5 rounded-xl border border-theme shadow-sm hover:shadow-md transition-shadow">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-9 h-9 bg-slate-50 text-[#5B5EF7] rounded-lg border border-theme flex items-center justify-center">
+                        <Workflow className="w-4.5 h-4.5" />
+                      </div>
+                      <h5 className="font-bold text-theme-primary">{product.integration.title}</h5>
+                    </div>
+                    <p className="text-theme-secondary text-sm leading-relaxed">
+                      {product.integration.desc}
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="text-lg font-bold text-theme-primary mb-5">Как это работает</h4>
+                  <div className="flex flex-col gap-4 relative">
+                    <div className="absolute left-[19px] top-4 bottom-4 w-px bg-slate-200" />
+                    {product.howItWorks.map((step, i) => (
+                      <div key={i} className="relative z-10 flex items-center gap-4">
+                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold text-sm shrink-0 shadow-sm ${i === product.howItWorks.length - 1 ? 'bg-gradient-to-r from-[#5B5EF7] to-[#22D3EE] text-white border-0' : 'bg-white border border-theme text-[#5B5EF7]'}`}>
+                          {i+1}
+                        </div>
+                        <p className="text-theme-secondary text-sm font-medium">
+                          {step}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 function ProductsPage() { 
   React.useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
     <div className="relative z-10 w-full min-h-screen">
-      
-      {/* Intro Product Header */}
-      <div className="pt-20 pb-16 px-6 border-b border-theme relative bg-theme-card overflow-hidden">
-        {/* Glow */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#A78BFA]/10 radius-btn blur-[120px] pointer-events-none translate-x-1/2 -translate-y-1/2" />
-
+      <div className="pt-20 pb-16 px-6 border-b border-[rgba(229,231,235,0.6)] relative bg-white/40 overflow-hidden">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#A78BFA]/5 radius-btn blur-[120px] pointer-events-none translate-x-1/2 -translate-y-1/2" />
         <div className="max-w-5xl mx-auto text-center relative z-10 mt-10">
            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <div className="inline-flex items-center gap-2 bg-[#F6F7FB] text-[#5B5EF7] font-bold text-xs uppercase tracking-widest radius-btn px-4 py-1.5 mb-6 border border-theme">
+              <div className="inline-flex items-center gap-2 bg-white/50 backdrop-blur-md text-[#5B5EF7] font-bold text-xs uppercase tracking-widest radius-btn px-4 py-1.5 mb-6 border border-white/60 shadow-[0_4px_16px_rgba(0,0,0,0.02)]">
                 Наши продукты
               </div>
               <h1 className="text-4xl md:text-6xl font-black text-theme-primary tracking-tight mb-6">
@@ -456,148 +545,26 @@ function ProductsPage() {
         </div>
       </div>
 
-      <div className="py-24 px-6 bg-theme-bg">
-        <div className="max-w-7xl mx-auto">
-          
-          {/* THE MAIN PRODUCT: ORDERLY */}
-          <div className="bg-theme-card rounded-[2rem] border border-theme shadow-theme-md relative overflow-hidden mb-32 hover:shadow-theme-lg transition-all duration-300">
-            
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 relative z-10">
-              
-              {/* Text Side */}
-              <div className="p-10 md:p-16 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-theme bg-theme-card">
-                <motion.div 
-                  initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
-                >
-                  <div className="mb-6">
-                    <span className="bg-[#1C1917] text-white px-3 py-1 rounded break-words font-black tracking-widest uppercase text-xs">Флагман</span>
-                  </div>
-                  <h2 className="text-5xl font-black text-theme-primary mb-2">Orderly</h2>
-                  <h3 className="text-[#5B5EF7] font-bold tracking-widest uppercase text-sm mb-8">A modern B2B client ordering system</h3>
-                  
-                  <p className="text-lg text-theme-secondary leading-relaxed mb-4">
-                    Универсальная <strong>система заказов B2B для бизнеса и его клиентов</strong>.
-                  </p>
-                  <p className="text-theme-secondary leading-relaxed mb-10">
-                     Избавьтесь от ручной обработки заказов, хаоса в WhatsApp и Excel. Orderly обеспечивает централизованное управление, структурированный каталог и быстрый интерфейс связи бизнеса со своими клиентами.
-                  </p>
-
-                  <a 
-                    href="https://orderly-by-vantorix.vercel.app/" target="_blank" rel="noreferrer"
-                    className="inline-flex items-center gap-3 bg-[#5B5EF7] text-white hover:bg-[#A84B2E] px-8 py-4 radius-ui font-bold transition-all shadow-theme-md group w-full lg:w-auto justify-center"
-                  >
-                    Посмотреть Orderly <ExternalLink className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                  </a>
-                </motion.div>
-              </div>
-
-              {/* Graphic Side: Features List & Flow */}
-              <div className="p-10 md:p-16 bg-[#FAFAFA] flex flex-col">
-                 <motion.div 
-                   initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.2 }}
-                 >
-                    <h3 className="text-2xl font-bold text-theme-primary mb-8 border-b border-theme pb-4">Ключевые функции</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
-                      <div className="flex gap-3">
-                        <Users className="w-5 h-5 text-[#5B5EF7] shrink-0 mt-1" />
-                        <span className="text-theme-secondary">Приватный доступ клиентов (invite-система)</span>
-                      </div>
-                      <div className="flex gap-3">
-                        <ShoppingBag className="w-5 h-5 text-[#5B5EF7] shrink-0 mt-1" />
-                        <span className="text-theme-secondary">Структурированный каталог товаров</span>
-                      </div>
-                      <div className="flex gap-3">
-                        <Terminal className="w-5 h-5 text-[#5B5EF7] shrink-0 mt-1" />
-                        <span className="text-theme-secondary">Создание и трекинг заказов</span>
-                      </div>
-                      <div className="flex gap-3">
-                        <LayoutDashboard className="w-5 h-5 text-[#5B5EF7] shrink-0 mt-1" />
-                        <span className="text-theme-secondary">Дашборд для владельца бизнеса</span>
-                      </div>
-                      <div className="flex gap-3">
-                        <Users className="w-5 h-5 text-[#5B5EF7] shrink-0 mt-1" />
-                        <span className="text-theme-secondary">Многоклиентская среда управления</span>
-                      </div>
-                      <div className="flex gap-3">
-                        <LinkIcon className="w-5 h-5 text-[#5B5EF7] shrink-0 mt-1" />
-                        <span className="text-theme-secondary">Интеграция с Bitrix24 (CRM)</span>
-                      </div>
-                    </div>
-
-                    <h3 className="text-2xl font-bold text-theme-primary mb-8 border-b border-theme pb-4">Интеграция</h3>
-                    <div className="bg-theme-card p-6 radius-card border border-theme shadow-theme-sm relative">
-                      <div className="flex items-center gap-4 mb-4">
-                        <div className="w-10 h-10 bg-[#F6F7FB] text-[#5B5EF7] radius-ui flex items-center justify-center">
-                          <Workflow className="w-5 h-5" />
-                        </div>
-                        <h4 className="text-lg font-bold text-theme-primary">Синхронизация с Bitrix24</h4>
-                      </div>
-                      <p className="text-theme-secondary text-sm leading-relaxed">
-                        Заказы и клиенты автоматически синхронизируются с CRM системами бизнеса для непрерывного сквозного контроля.
-                      </p>
-                    </div>
-
-                 </motion.div>
-              </div>
-
-            </div>
-
-            {/* How It Works Flow (Bottom part of card) */}
-            <div className="border-t border-theme bg-theme-card p-10 md:p-16">
-              <h3 className="text-3xl font-bold text-center text-theme-primary mb-16">Как это работает</h3>
-              
-              <div className="flex flex-col gap-4 relative">
-                {/* Vertical connecting line */}
-                <div className="absolute left-[39px] top-6 bottom-6 w-0.5 bg-[#E5E7EB] md:hidden" />
-                
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
-                  {/* Horizontal connecting line */}
-                  <div className="hidden md:block absolute top-[40px] left-10 right-10 h-0.5 bg-[#E5E7EB] z-0" />
-                  
-                  {[
-                    "Владелец бизнеса создает рабочую среду",
-                    "Генерирует приватную invite-ссылку",
-                    "Отправляет клиенту для регистрации",
-                    "Клиент видит товары и размещает заказ",
-                    "Бизнес моментально получает заказ на обработку"
-                  ].map((step, i) => (
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                      key={i} className="relative z-10 flex flex-row md:flex-col items-center md:text-center gap-6 md:gap-4 md:col-span-1"
-                    >
-                      <div className={`w-20 h-20 radius-card flex items-center justify-center font-bold text-2xl shrink-0 shadow-theme-sm ${i === 4 ? 'bg-[#5B5EF7] text-white shadow-[#5B5EF7]/20' : 'bg-theme-card border border-theme text-[#5B5EF7]'}`}>
-                        0{i+1}
-                      </div>
-                      <p className="text-theme-secondary text-sm leading-relaxed font-medium">
-                        {step}
-                      </p>
-                    </motion.div>
-                  ))}
-                  <div className="hidden md:block col-span-4" /> 
-                </div>
-              </div>
-
-            </div>
-          </div>
-
+      <div className="py-24 px-6 bg-transparent">
+        <div className="max-w-7xl mx-auto relative z-10 gap-8 flex flex-col">
+          {productsData.map(product => (
+            <ProductCard key={product.id} product={product} />
+          ))}
         </div>
       </div>
     </div>
   );
 }
-
 // --- SHARED UI SUBCOMPONENTS ---
 
 function ServiceCard({ title, desc, icon }: { title: string, desc: string, icon: React.ReactNode }) {
   return (
-    <motion.div variants={fadeInUp} className="bg-theme-card border border-theme hover:border-[#5B5EF7]/30 p-8 rounded-[2rem] group flex flex-col items-start transition-all duration-300 shadow-theme-sm hover:shadow-theme-md cursor-default relative overflow-hidden h-full">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#5B5EF7]/0 via-transparent to-[#5B5EF7]/0 group-hover:from-[#5B5EF7]/5 group-hover:to-transparent transition-colors duration-500" />
-      
-      <div className="w-16 h-16 bg-theme-bg radius-card flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 text-[#5B5EF7] border border-theme relative z-10 group-hover:bg-[#F6F7FB] group-hover:border-theme">
+    <motion.div variants={fadeInUp} className="bg-white border border-theme p-10 rounded-[1.5rem] group flex flex-col items-start transition-all duration-300 shadow-sm hover:shadow-lg hover:border-[#5B5EF7]/40 cursor-default relative overflow-hidden h-full">
+      <div className="w-14 h-14 bg-slate-50 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 text-[#5B5EF7] border border-theme relative z-10 shrink-0">
         {icon}
       </div>
-      <h3 className="text-2xl font-bold text-theme-primary mb-4 relative z-10">{title}</h3>
-      <p className="text-theme-secondary leading-relaxed text-base relative z-10">{desc}</p>
+      <h3 className="text-xl font-bold text-theme-primary mb-3 relative z-10">{title}</h3>
+      <p className="text-theme-secondary leading-relaxed text-sm relative z-10">{desc}</p>
     </motion.div>
   );
 }
@@ -609,14 +576,14 @@ function ProcessStep({ number, title, desc }: { number: string, title: string, d
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5 }}
-      className="bg-theme-card p-8 rounded-[2rem] flex flex-col md:flex-row md:items-center gap-8 border border-theme w-full hover:border-[#5B5EF7]/20 transition-colors shadow-theme-sm cursor-default group"
+      className="bg-white p-8 rounded-[1.5rem] flex flex-col md:flex-row md:items-center gap-8 border border-theme w-full transition-all duration-300 shadow-sm hover:shadow-md hover:border-[#5B5EF7]/40 cursor-default group"
     >
-      <div className="w-20 h-20 bg-theme-bg border border-theme radius-card flex items-center justify-center font-black text-3xl text-theme-secondary shrink-0 group-hover:text-[#5B5EF7] group-hover:border-[#5B5EF7]/30 group-hover:bg-[#F6F7FB] transition-all duration-500">
+      <div className="w-16 h-16 bg-slate-50 border border-theme rounded-xl flex items-center justify-center font-bold text-2xl text-theme-secondary shrink-0 group-hover:text-[#5B5EF7] group-hover:border-[#5B5EF7]/30 transition-all duration-500">
         {number}
       </div>
       <div>
-        <h3 className="text-2xl font-bold text-theme-primary mb-3 tracking-tight">{title}</h3>
-        <p className="text-theme-secondary text-lg leading-relaxed">{desc}</p>
+        <h3 className="text-xl font-bold text-theme-primary mb-2 tracking-tight">{title}</h3>
+        <p className="text-theme-secondary text-base leading-relaxed">{desc}</p>
       </div>
     </motion.div>
   );
@@ -636,75 +603,30 @@ function PrivacyPage() {
   React.useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
-    <div className="relative z-10 w-full min-h-screen bg-theme-bg py-24 px-6">
-      <div className="max-w-4xl mx-auto bg-theme-card p-10 md:p-16 radius-card border border-theme shadow-theme-md relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-[#A78BFA]/10 radius-btn blur-[100px] pointer-events-none translate-x-1/2 -translate-y-1/2" />
+    <div className="relative z-10 w-full min-h-screen bg-transparent py-20 px-6">
+      <div className="max-w-4xl mx-auto bg-white p-10 md:p-16 rounded-[2rem] border border-theme shadow-sm relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-[#5B5EF7]/5 blur-[100px] pointer-events-none translate-x-1/2 -translate-y-1/2" />
         
         <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="relative z-10">
-          <h1 className="text-4xl md:text-5xl font-black text-theme-primary mb-4 tracking-tight">Политика конфиденциальности Vantorix</h1>
-          <p className="text-theme-secondary mb-12">Дата вступления в силу: [03.05.2026]</p>
+          <h1 className="text-4xl md:text-5xl font-black text-theme-primary mb-4 tracking-tight">Политика конфиденциальности</h1>
+          <p className="text-theme-secondary mb-12 font-medium">Обновлено: 03.05.2026</p>
 
-          <div className="prose prose-stone prose-lg max-w-none text-theme-secondary">
-            <p>Компания Vantorix уважает вашу конфиденциальность и стремится защищать персональные данные пользователей.</p>
+          <div className="prose prose-slate max-w-none text-theme-secondary">
+            <p className="text-lg">Компания Vantorix ценит ваше доверие и применяет современные стандарты защиты персональных данных.</p>
             
-            <hr className="my-8 border-theme" />
+            <div className="my-10 h-px bg-slate-100" />
             
-            <h3 className="text-2xl font-bold text-theme-primary mt-8 mb-4">1. Какие данные мы собираем</h3>
-            <p>Мы можем собирать следующие данные:</p>
-            <ul className="list-disc pl-6 mb-6 space-y-2">
-              <li>Имя и фамилия</li>
-              <li>Адрес электронной почты</li>
-              <li>Данные аккаунта (логин, пароль в зашифрованном виде)</li>
-              <li>Данные, связанные с использованием сервиса (заказы, действия в системе)</li>
-              <li>Технические данные (IP-адрес, тип устройства, браузер)</li>
-            </ul>
+            <h3 className="text-xl font-bold text-theme-primary mb-4">1. Сбор информации</h3>
+            <p>Мы собираем только те данные, которые необходимы для предоставления доступа к продуктам и обеспечения их стабильной работы (email, имя, технические параметры устройства).</p>
 
-            <h3 className="text-2xl font-bold text-theme-primary mt-8 mb-4">2. Как мы используем данные</h3>
-            <p>Мы используем данные для:</p>
-            <ul className="list-disc pl-6 mb-6 space-y-2">
-              <li>Предоставления доступа к системе</li>
-              <li>Обработки заказов и работы сервиса</li>
-              <li>Связи с пользователями</li>
-              <li>Улучшения качества продукта</li>
-              <li>Обеспечения безопасности</li>
-            </ul>
+            <h3 className="text-xl font-bold text-theme-primary mt-8 mb-4">2. Использование данных</h3>
+            <p>Ваши данные используются исключительно для аутентификации, поддержки пользователей и улучшения функциональности сервисов Vantorix.</p>
 
-            <h3 className="text-2xl font-bold text-theme-primary mt-8 mb-4">3. Передача данных третьим лицам</h3>
-            <p>Мы не продаём персональные данные. Данные могут передаваться:</p>
-            <ul className="list-disc pl-6 mb-6 space-y-2">
-              <li>Сервисам, необходимым для работы платформы (например, хостинг, аналитика)</li>
-              <li>CRM-системам (например, Bitrix24) при использовании интеграций</li>
-              <li>В случаях, предусмотренных законодательством</li>
-            </ul>
+            <h3 className="text-xl font-bold text-theme-primary mt-8 mb-4">3. Безопасность</h3>
+            <p>Все персональные данные хранятся в зашифрованном виде с использованием протоколов безопасности корпоративного уровня.</p>
 
-            <h3 className="text-2xl font-bold text-theme-primary mt-8 mb-4">4. Хранение и защита данных</h3>
-            <p>Мы принимаем технические и организационные меры для защиты данных от:</p>
-            <ul className="list-disc pl-6 mb-6 space-y-2">
-              <li>несанкционированного доступа</li>
-              <li>утраты</li>
-              <li>изменения</li>
-            </ul>
-
-            <h3 className="text-2xl font-bold text-theme-primary mt-8 mb-4">5. Cookies и технологии</h3>
-            <p>Мы можем использовать cookies и аналогичные технологии для:</p>
-            <ul className="list-disc pl-6 mb-6 space-y-2">
-              <li>корректной работы сайта</li>
-              <li>анализа использования</li>
-            </ul>
-
-            <h3 className="text-2xl font-bold text-theme-primary mt-8 mb-4">6. Права пользователя</h3>
-            <p>Пользователь имеет право:</p>
-            <ul className="list-disc pl-6 mb-6 space-y-2">
-              <li>запросить доступ к своим данным</li>
-              <li>запросить удаление данных</li>
-              <li>отозвать согласие на обработку</li>
-            </ul>
-
-            <h3 className="text-2xl font-bold text-theme-primary mt-8 mb-4">7. Изменения политики</h3>
-            <p>Мы можем обновлять данную политику. Актуальная версия всегда доступна на сайте.</p>
-
-            <h3 className="text-2xl font-bold text-theme-primary mt-8 mb-4">8. Контакты</h3>
-            <p>По вопросам конфиденциальности:<br/>telegram @vantorix_os</p>
+            <h3 className="text-xl font-bold text-theme-primary mt-8 mb-4">4. Обратная связь</h3>
+            <p>По любым вопросам защиты данных вы можете написать нашему офицеру по безопасности в Telegram: <a href="https://t.me/vantorix_os" className="text-[#5B5EF7] font-semibold">@vantorix_os</a></p>
           </div>
         </motion.div>
       </div>
@@ -717,82 +639,26 @@ function TermsPage() {
   React.useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
-    <div className="relative z-10 w-full min-h-screen bg-theme-bg py-24 px-6">
-       <div className="max-w-4xl mx-auto bg-theme-card p-10 md:p-16 radius-card border border-theme shadow-theme-md relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-[#22D3EE]/10 radius-btn blur-[100px] pointer-events-none translate-x-1/2 -translate-y-1/2" />
+    <div className="relative z-10 w-full min-h-screen bg-transparent py-20 px-6">
+       <div className="max-w-4xl mx-auto bg-white p-10 md:p-16 rounded-[2rem] border border-theme shadow-sm relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-[#22D3EE]/5 blur-[100px] pointer-events-none translate-x-1/2 -translate-y-1/2" />
         
         <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="relative z-10">
-          <h1 className="text-4xl md:text-5xl font-black text-theme-primary mb-4 tracking-tight">Условия оказания услуг Vantorix</h1>
-          <p className="text-theme-secondary mb-12">Дата вступления в силу: [03.05.2026]</p>
+          <h1 className="text-4xl md:text-5xl font-black text-theme-primary mb-4 tracking-tight">Условия использования</h1>
+          <p className="text-theme-secondary mb-12 font-medium">Обновлено: 03.05.2026</p>
 
-          <div className="prose prose-stone prose-lg max-w-none text-theme-secondary">
-            <h3 className="text-2xl font-bold text-theme-primary mt-8 mb-4">1. Общие положения</h3>
-            <p>Настоящие Условия регулируют использование сервисов Vantorix. Используя сайт и сервисы, вы соглашаетесь с данными условиями.</p>
+          <div className="prose prose-slate max-w-none text-theme-secondary">
+            <h3 className="text-xl font-bold text-theme-primary mb-4">1. Продуктовая модель</h3>
+            <p>Vantorix является продуктовой компанией. Мы разрабатываем и предоставляем доступ к собственным цифровым системам. Мы не занимаемся заказной разработкой веб-сайтов или приложений для сторонних клиентов.</p>
 
-            <h3 className="text-2xl font-bold text-theme-primary mt-8 mb-4">2. Описание сервиса</h3>
-            <p>Vantorix предоставляет:</p>
-            <ul className="list-disc pl-6 mb-6 space-y-2">
-              
-              <li>создание систем (CRM, ERP, заказные системы)</li>
-              <li>SaaS решения</li>
-              <li>систему заказов для бизнеса (Orderly)</li>
-            </ul>
+            <h3 className="text-xl font-bold text-theme-primary mt-8 mb-4">2. Доступ к сервисам</h3>
+            <p>Доступ к продуктам Vantorix предоставляется на условиях подписки или приглашения. Владельцы бизнеса несут полную ответственность за управление доступом своих сотрудников и клиентов.</p>
 
-            <h3 className="text-2xl font-bold text-theme-primary mt-8 mb-4">3. Аккаунт пользователя</h3>
-            <p>Пользователь обязуется:</p>
-            <ul className="list-disc pl-6 mb-6 space-y-2">
-              <li>предоставлять достоверные данные</li>
-              <li>не передавать доступ третьим лицам</li>
-              <li>обеспечивать безопасность аккаунта</li>
-            </ul>
-            <p>Компания не несёт ответственности за действия, совершённые через аккаунт пользователя.</p>
+            <h3 className="text-xl font-bold text-theme-primary mt-8 mb-4">3. Интеллектуальная собственность</h3>
+            <p>Все права на программный код, интерфейсы и логику работы продуктов принадлежат Vantorix Labs.</p>
 
-            <h3 className="text-2xl font-bold text-theme-primary mt-8 mb-4">4. Использование сервиса</h3>
-            <p>Запрещается:</p>
-            <ul className="list-disc pl-6 mb-6 space-y-2">
-              <li>использовать сервис для незаконной деятельности</li>
-              <li>пытаться взломать систему</li>
-              <li>нарушать работу платформы</li>
-            </ul>
-
-            <h3 className="text-2xl font-bold text-theme-primary mt-8 mb-4">5. Доступ к системе заказов</h3>
-            <ul className="list-disc pl-6 mb-6 space-y-2">
-              <li>Доступ предоставляется по приглашению (invite)</li>
-              <li>Бизнес самостоятельно управляет доступом клиентов</li>
-              <li>Компания не несёт ответственности за действия пользователей внутри системы конкретного бизнеса</li>
-            </ul>
-
-            <h3 className="text-2xl font-bold text-theme-primary mt-8 mb-4">6. Интеграции</h3>
-            <p>Сервис может интегрироваться с третьими системами (например, Bitrix24). Компания не несёт ответственности за работу сторонних сервисов.</p>
-
-            <h3 className="text-2xl font-bold text-theme-primary mt-8 mb-4">7. Ограничение ответственности</h3>
-            <p>Сервис предоставляется "как есть". Компания не гарантирует:</p>
-            <ul className="list-disc pl-6 mb-6 space-y-2">
-              <li>отсутствие ошибок</li>
-              <li>бесперебойную работу</li>
-              <li>соответствие ожиданиям пользователя</li>
-            </ul>
-
-            <h3 className="text-2xl font-bold text-theme-primary mt-8 mb-4">8. Изменения сервиса</h3>
-            <p>Компания может:</p>
-            <ul className="list-disc pl-6 mb-6 space-y-2">
-              <li>изменять функционал</li>
-              <li>добавлять или удалять функции</li>
-              <li>обновлять систему без предварительного уведомления</li>
-            </ul>
-
-            <h3 className="text-2xl font-bold text-theme-primary mt-8 mb-4">9. Прекращение доступа</h3>
-            <p>Компания может ограничить доступ в случае:</p>
-            <ul className="list-disc pl-6 mb-6 space-y-2">
-              <li>нарушения условий</li>
-              <li>подозрительной активности</li>
-            </ul>
-
-            <h3 className="text-2xl font-bold text-theme-primary mt-8 mb-4">10. Изменения условий</h3>
-            <p>Условия могут обновляться. Продолжение использования означает согласие с изменениями.</p>
-
-            <h3 className="text-2xl font-bold text-theme-primary mt-8 mb-4">11. Контакты</h3>
-            <p>telegram 03.05.2026</p>
+            <h3 className="text-xl font-bold text-theme-primary mt-8 mb-4">4. Ограничение ответственности</h3>
+            <p>Сервисы предоставляются по принципу "как есть". Мы гарантируем техническую поддержку и исправление критических ошибок, но не несем ответственности за косвенные убытки от использования ПО.</p>
           </div>
         </motion.div>
       </div>
