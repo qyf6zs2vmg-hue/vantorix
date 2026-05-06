@@ -66,7 +66,6 @@ h1, h2, h3, h4, h5, h6 {
 .shadow-theme-md { box-shadow: var(--shadow-md); }
 .shadow-theme-lg { box-shadow: var(--shadow-lg); }
 .radius-card { border-radius: var(--radius-card); }
-.radius-btn { border-radius: var(--radius-btn); }
 .radius-ui { border-radius: var(--radius-ui); }
 
 /* Custom Gradient Text */
@@ -118,31 +117,72 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-btn);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  height: 2.25rem;
+}
+
+.btn-md {
+  padding: 0.625rem 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  height: 2.75rem;
+}
+
+.btn-lg {
+  padding: 0.875rem 1.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  height: 3.25rem;
+}
+
 .btn-primary {
   background: var(--gradient);
   color: white;
-  transition: all 0.2s ease;
-  font-weight: 600;
-  box-shadow: 0 4px 6px -1px rgba(91, 94, 247, 0.2);
+  border: 1px solid transparent;
+  box-shadow: 0 4px 6px -1px rgba(91, 94, 247, 0.2), inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
 .btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 10px 15px -3px rgba(91, 94, 247, 0.3);
-  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(91, 94, 247, 0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+  filter: brightness(1.05);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
 }
 
 .btn-secondary {
   background-color: white;
   color: var(--text-primary);
   border: 1px solid var(--border);
-  transition: all 0.2s ease;
-  font-weight: 500;
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-secondary:hover {
   background-color: #F8FAFC;
   border-color: #CBD5E1;
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  color: #5B5EF7;
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
 }
 
 /* Reveal Animation */

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
+import OrderlyProductPage from './OrderlyProductPage';
 import { 
   ArrowRight, 
   Send,
@@ -36,7 +37,7 @@ const staggerContainer = {
 };
 
 export default function App() {
-  const [currentView, setCurrentView] = useState<'home' | 'products' | 'privacy' | 'terms'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'products' | 'privacy' | 'terms' | 'product-orderly'>('home');
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { scrollYProgress } = useScroll();
@@ -98,7 +99,7 @@ export default function App() {
           </div>
           
           <div className="hidden md:block">
-            <a href="#contact" className="btn-primary px-5 py-2.5 text-sm">
+            <a href="#contact" className="btn btn-sm btn-primary">
               Связаться
             </a>
           </div>
@@ -126,7 +127,7 @@ export default function App() {
               </>
             )}
             <button onClick={() => { setMobileMenuOpen(false); setCurrentView('products'); }} className="text-theme-secondary hover:text-[#5B5EF7] py-2 text-lg font-medium">Продукты</button>
-            <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="bg-[#5B5EF7] hover:bg-[#A78BFA] text-white px-6 py-3 radius-ui mt-4 text-lg font-bold">Связаться</a>
+            <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="btn btn-md btn-primary mt-4 w-full">Связаться</a>
           </motion.div>
         )}
       </AnimatePresence>
@@ -151,7 +152,21 @@ export default function App() {
               exit={{ opacity: 0, y: -30 }}
               transition={{ duration: 0.5 }}
             >
-              <ProductsPage />
+              <ProductsPage onViewProduct={(id) => {
+                if (id === 'orderly') {
+                  setCurrentView('product-orderly');
+                }
+              }} />
+            </motion.div>
+          ) : currentView === 'product-orderly' ? (
+             <motion.div
+              key="product-orderly"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.5 }}
+            >
+              <OrderlyProductPage />
             </motion.div>
           ) : currentView === 'privacy' ? (
              <motion.div
@@ -199,9 +214,9 @@ export default function App() {
               <div className="flex justify-center mt-4">
                 <a 
                   href="https://t.me/vantorix_os" target="_blank" rel="noreferrer"
-                  className="btn-primary px-10 py-5 text-xl flex items-center gap-3"
+                  className="btn btn-lg btn-primary"
                 >
-                  Связаться в Telegram <ArrowRight className="w-6 h-6" />
+                  Связаться в Telegram <ArrowRight className="w-5 h-5" />
                 </a>
               </div>
             </motion.div>
@@ -279,10 +294,10 @@ function HomePage({ onViewProducts }: { onViewProducts: () => void }) {
             transition={{ delay: 0.3, duration: 0.8 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10 w-full max-w-md mx-auto"
           >
-            <button onClick={onViewProducts} className="w-full sm:w-auto btn-primary px-10 py-4 text-lg min-w-[200px] flex items-center justify-center gap-2 group">
+            <button onClick={onViewProducts} className="btn btn-lg btn-primary w-full sm:w-auto min-w-[200px] group">
               Наши продукты <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
-            <a href="#services" className="w-full sm:w-auto btn-secondary px-10 py-4 text-lg min-w-[200px] flex items-center justify-center gap-2">
+            <a href="#services" className="btn btn-lg btn-secondary w-full sm:w-auto min-w-[200px]">
               Решения
             </a>
           </motion.div>
@@ -369,7 +384,7 @@ function HomePage({ onViewProducts }: { onViewProducts: () => void }) {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-24">
             <h2 className="text-4xl md:text-6xl font-black text-theme-primary mb-6 tracking-tight">Почему Vantorix?</h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-[#5B5EF7] to-transparent mx-auto radius-btn" />
+            <div className="w-24 h-1 bg-gradient-to-r from-[#5B5EF7] to-transparent mx-auto rounded-full" />
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -418,9 +433,7 @@ const productsData = [
   }
 ];
 
-function ProductCard({ product }: { product: typeof productsData[0], key?: string | number }) {
-  const [expanded, setExpanded] = React.useState(false);
-
+function ProductCard({ product, onViewDetails }: { product: typeof productsData[0], onViewDetails: () => void }) {
   return (
     <div className="bg-white rounded-[1.5rem] border border-theme shadow-sm relative overflow-hidden mb-8 transition-all duration-300 group hover:shadow-lg hover:border-[#5B5EF7]/30">
       <div className="p-8 md:p-12 flex flex-col md:flex-row gap-8 justify-between items-start md:items-center relative z-10">
@@ -430,7 +443,7 @@ function ProductCard({ product }: { product: typeof productsData[0], key?: strin
           </div>
           <div>
             <div className="mb-2">
-              <span className="bg-slate-100 text-[#5B5EF7] px-2.5 py-0.5 rounded-full font-bold tracking-tight text-[11px] uppercase border border-[#5B5EF7]/20 shadow-sm">{product.tag}</span>
+               <span className="bg-slate-100 text-[#5B5EF7] px-2.5 py-0.5 rounded-full font-bold tracking-tight text-[11px] uppercase border border-[#5B5EF7]/20 shadow-sm">{product.tag}</span>
             </div>
             <h2 className="text-2xl md:text-3xl font-black text-theme-primary mb-1">
               {product.name}
@@ -444,95 +457,33 @@ function ProductCard({ product }: { product: typeof productsData[0], key?: strin
         <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto shrink-0 mt-4 md:mt-0">
           <a 
             href={product.link} target="_blank" rel="noreferrer"
-            className="btn-primary px-6 py-2.5 text-sm inline-flex items-center justify-center gap-2"
+            className="btn btn-md btn-primary w-full sm:w-auto"
           >
-            Посмотреть <ExternalLink className="w-4 h-4" />
+            Перейти <ExternalLink className="w-4 h-4" />
           </a>
           <button 
-            onClick={() => setExpanded(!expanded)}
-            className="btn-secondary px-6 py-2.5 text-sm inline-flex items-center justify-center gap-2"
+            onClick={onViewDetails}
+            className="btn btn-md btn-secondary w-full sm:w-auto"
           >
-            {expanded ? 'Скрыть детали' : 'Подробнее'}
-            <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`} />
+            Подробнее
+            <ArrowRight className="w-4 h-4" />
           </button>
         </div>
       </div>
-
-      <AnimatePresence>
-        {expanded && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="border-t border-theme/50"
-          >
-            <div className="p-8 md:p-12 bg-slate-50/30">
-              <h3 className="text-[#5B5EF7] font-bold tracking-widest uppercase text-[11px] mb-6">{product.subtitle}</h3>
-              <p className="text-base text-theme-secondary leading-relaxed mb-10 max-w-3xl">
-                {product.desc}
-              </p>
-
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                <div>
-                  <h4 className="text-lg font-bold text-theme-primary mb-5">Ключевые функции</h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {product.features.map((feat, i) => (
-                      <div key={i} className="flex gap-3">
-                        <div className="shrink-0 mt-0.5 text-[#5B5EF7]">{feat.icon}</div>
-                        <span className="text-theme-secondary text-sm">{feat.text}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <h4 className="text-lg font-bold text-theme-primary mt-10 mb-5">Интеграция</h4>
-                  <div className="bg-white p-5 rounded-xl border border-theme shadow-sm hover:shadow-md transition-shadow">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="w-9 h-9 bg-slate-50 text-[#5B5EF7] rounded-lg border border-theme flex items-center justify-center">
-                        <Workflow className="w-4.5 h-4.5" />
-                      </div>
-                      <h5 className="font-bold text-theme-primary">{product.integration.title}</h5>
-                    </div>
-                    <p className="text-theme-secondary text-sm leading-relaxed">
-                      {product.integration.desc}
-                    </p>
-                  </div>
-                </div>
-
-                <div>
-                  <h4 className="text-lg font-bold text-theme-primary mb-5">Как это работает</h4>
-                  <div className="flex flex-col gap-4 relative">
-                    <div className="absolute left-[19px] top-4 bottom-4 w-px bg-slate-200" />
-                    {product.howItWorks.map((step, i) => (
-                      <div key={i} className="relative z-10 flex items-center gap-4">
-                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold text-sm shrink-0 shadow-sm ${i === product.howItWorks.length - 1 ? 'bg-gradient-to-r from-[#5B5EF7] to-[#22D3EE] text-white border-0' : 'bg-white border border-theme text-[#5B5EF7]'}`}>
-                          {i+1}
-                        </div>
-                        <p className="text-theme-secondary text-sm font-medium">
-                          {step}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
 
-function ProductsPage() { 
+function ProductsPage({ onViewProduct }: { onViewProduct: (id: string) => void }) { 
   React.useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
     <div className="relative z-10 w-full min-h-screen">
       <div className="pt-20 pb-16 px-6 border-b border-[rgba(229,231,235,0.6)] relative bg-white/40 overflow-hidden">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#A78BFA]/5 radius-btn blur-[120px] pointer-events-none translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#A78BFA]/5 rounded-full blur-[120px] pointer-events-none translate-x-1/2 -translate-y-1/2" />
         <div className="max-w-5xl mx-auto text-center relative z-10 mt-10">
            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <div className="inline-flex items-center gap-2 bg-white/50 backdrop-blur-md text-[#5B5EF7] font-bold text-xs uppercase tracking-widest radius-btn px-4 py-1.5 mb-6 border border-white/60 shadow-[0_4px_16px_rgba(0,0,0,0.02)]">
+              <div className="inline-flex items-center gap-2 bg-white/50 backdrop-blur-md text-[#5B5EF7] font-bold text-xs uppercase tracking-widest rounded-full px-4 py-1.5 mb-6 border border-white/60 shadow-[0_4px_16px_rgba(0,0,0,0.02)]">
                 Наши продукты
               </div>
               <h1 className="text-4xl md:text-6xl font-black text-theme-primary tracking-tight mb-6">
@@ -548,7 +499,7 @@ function ProductsPage() {
       <div className="py-24 px-6 bg-transparent">
         <div className="max-w-7xl mx-auto relative z-10 gap-8 flex flex-col">
           {productsData.map(product => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product.id} product={product} onViewDetails={() => onViewProduct(product.id)} />
           ))}
         </div>
       </div>
