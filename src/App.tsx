@@ -61,15 +61,6 @@ export default function App() {
       
       {/* Background elements */}
       <div className="fixed inset-0 z-[-1] pointer-events-none overflow-hidden bg-white">
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.05]" />
-        <motion.div 
-          style={{ y: yBackground }}
-          className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-[#5B5EF7]/5 blur-[120px] animate-blob" 
-        />
-        <motion.div 
-          style={{ y: yBackground }}
-          className="absolute top-[20%] right-[-10%] w-[35%] h-[35%] rounded-full bg-[#22D3EE]/5 blur-[120px] animate-blob" 
-        />
       </div>
 
       {/* Navigation */}
@@ -77,7 +68,7 @@ export default function App() {
         <div className="w-full max-w-7xl mx-auto px-6 flex items-center justify-between">
           <div onClick={() => setCurrentView('home')} className="flex items-center gap-2.5 cursor-pointer group">
             <img 
-              src="https://drive.google.com/thumbnail?id=1lZiGAgwoT5xeHXe8ArgtUIak7ZaVg6FV&sz=w500" 
+              src="https://drive.google.com/thumbnail?id=1Zzhxcg4wGu4HCBSmPptAhuTqb-s8yb3D&sz=w500" 
               alt="Vantorix Logo" 
               className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
             />
@@ -88,22 +79,34 @@ export default function App() {
             {currentView === 'home' && (
               <>
                 <a href="#about" className="hover:text-theme-primary transition-colors">О нас</a>
+                <button onClick={() => setCurrentView('products')} className="hover:text-theme-primary transition-colors">Продукты</button>
                 <a href="#services" className="hover:text-theme-primary transition-colors">Решения</a>
                 <a href="#process" className="hover:text-theme-primary transition-colors">Процесс</a>
               </>
             )}
-            <button 
-              onClick={() => setCurrentView('products')} 
-              className={`${currentView === 'products' ? 'text-[#5B5EF7]' : 'hover:text-theme-primary'} transition-all`}
-            >
-              Продукты
-            </button>
+            {currentView !== 'home' && (
+              <button onClick={() => setCurrentView('home')} className="hover:text-theme-primary transition-colors">Главная</button>
+            )}
+            {currentView !== 'products' && currentView !== 'home' && (
+              <button 
+                onClick={() => setCurrentView('products')} 
+                className={`${currentView === 'products' ? 'text-[#5B5EF7]' : 'hover:text-theme-primary'} transition-all`}
+              >
+                Продукты
+              </button>
+            )}
           </div>
           
           <div className="hidden md:block">
-            <a href="#contact" className="btn btn-sm btn-primary">
-              Связаться
-            </a>
+            {currentView === 'home' ? (
+              <a href="#contact" className="btn btn-sm btn-primary">
+                Связаться
+              </a>
+            ) : (
+              <a href="mailto:contact@vantorix.com" className="btn btn-sm btn-primary">
+                Связаться
+              </a>
+            )}
           </div>
 
           <button className="md:hidden text-theme-primary" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
@@ -124,12 +127,23 @@ export default function App() {
             {currentView === 'home' && (
               <>
                 <a href="#about" onClick={() => setMobileMenuOpen(false)} className="text-theme-secondary hover:text-[#5B5EF7] py-2 text-lg font-medium">О нас</a>
+                <button onClick={() => { setMobileMenuOpen(false); setCurrentView('products'); }} className="text-theme-secondary hover:text-[#5B5EF7] py-2 text-lg font-medium">Продукты</button>
                 <a href="#services" onClick={() => setMobileMenuOpen(false)} className="text-theme-secondary hover:text-[#5B5EF7] py-2 text-lg font-medium">Решения</a>
                 <a href="#process" onClick={() => setMobileMenuOpen(false)} className="text-theme-secondary hover:text-[#5B5EF7] py-2 text-lg font-medium">Процесс</a>
               </>
             )}
-            <button onClick={() => { setMobileMenuOpen(false); setCurrentView('products'); }} className="text-theme-secondary hover:text-[#5B5EF7] py-2 text-lg font-medium">Продукты</button>
-            <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="btn btn-md btn-primary mt-4 w-full">Связаться</a>
+            {currentView !== 'home' && (
+              <button onClick={() => { setMobileMenuOpen(false); setCurrentView('home'); }} className="text-theme-secondary hover:text-[#5B5EF7] py-2 text-lg font-medium">Главная</button>
+            )}
+            {currentView !== 'products' && currentView !== 'home' && (
+              <button onClick={() => { setMobileMenuOpen(false); setCurrentView('products'); }} className="text-theme-secondary hover:text-[#5B5EF7] py-2 text-lg font-medium">Продукты</button>
+            )}
+            
+            {currentView === 'home' ? (
+              <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="btn btn-md btn-primary mt-4 w-full">Связаться</a>
+            ) : (
+              <a href="mailto:contact@vantorix.com" onClick={() => setMobileMenuOpen(false)} className="btn btn-md btn-primary mt-4 w-full">Связаться</a>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
@@ -196,7 +210,7 @@ export default function App() {
 
       {/* КАРТОЧКА КОНТАКТОВ & АНИМАЦИЯ */}
       <section id="contact" className="py-32 px-6 relative border-t border-theme overflow-hidden bg-white">
-        <div className="absolute top-0 right-0 w-[40%] h-[40%] bg-[#5B5EF7]/5 blur-[100px] rounded-full" />
+
         
         <div className="max-w-4xl mx-auto flex flex-col items-center text-center relative z-10">
             <motion.div
@@ -244,7 +258,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-3">
             <img 
-              src="https://drive.google.com/thumbnail?id=1lZiGAgwoT5xeHXe8ArgtUIak7ZaVg6FV&sz=w500" 
+              src="https://drive.google.com/thumbnail?id=1Zzhxcg4wGu4HCBSmPptAhuTqb-s8yb3D&sz=w500" 
               alt="Vantorix Logo" 
               className="h-8 w-auto object-contain" 
             />
@@ -268,7 +282,7 @@ function HomePage({ onViewProducts }: { onViewProducts: () => void }) {
   return (
     <>
       <section className="relative pt-10 pb-20 md:pt-24 md:pb-32 px-6 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl h-[400px] bg-[#5B5EF7]/10 blur-[130px] rounded-full pointer-events-none" />
+
         
         <div className="max-w-5xl mx-auto text-center relative z-10 w-full mt-10 md:mt-20">
           <motion.div
@@ -482,7 +496,7 @@ function ProductsPage({ onViewProduct }: { onViewProduct: (id: string) => void }
   return (
     <div className="relative z-10 w-full min-h-screen">
       <div className="pt-20 pb-16 px-6 border-b border-[rgba(229,231,235,0.6)] relative bg-white/40 overflow-hidden">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#A78BFA]/5 rounded-full blur-[120px] pointer-events-none translate-x-1/2 -translate-y-1/2" />
+
         <div className="max-w-5xl mx-auto text-center relative z-10 mt-10">
            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
               <div className="inline-flex items-center gap-2 bg-white/50 backdrop-blur-md text-[#5B5EF7] font-bold text-xs uppercase tracking-widest rounded-full px-4 py-1.5 mb-6 border border-white/60 shadow-[0_4px_16px_rgba(0,0,0,0.02)]">
@@ -558,7 +572,7 @@ function PrivacyPage() {
   return (
     <div className="relative z-10 w-full min-h-screen bg-transparent py-20 px-6">
       <div className="max-w-4xl mx-auto bg-white p-10 md:p-16 rounded-[2rem] border border-theme shadow-sm relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-[#5B5EF7]/5 blur-[100px] pointer-events-none translate-x-1/2 -translate-y-1/2" />
+
         
         <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="relative z-10">
           <h1 className="text-4xl md:text-5xl font-black text-theme-primary mb-4 tracking-tight">Политика конфиденциальности</h1>
@@ -594,7 +608,7 @@ function TermsPage() {
   return (
     <div className="relative z-10 w-full min-h-screen bg-transparent py-20 px-6">
        <div className="max-w-4xl mx-auto bg-white p-10 md:p-16 rounded-[2rem] border border-theme shadow-sm relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-[#22D3EE]/5 blur-[100px] pointer-events-none translate-x-1/2 -translate-y-1/2" />
+
         
         <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="relative z-10">
           <h1 className="text-4xl md:text-5xl font-black text-theme-primary mb-4 tracking-tight">Условия использования</h1>

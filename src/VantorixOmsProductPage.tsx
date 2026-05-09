@@ -26,18 +26,11 @@ export default function VantorixOmsProductPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] font-sans text-[#1F2937] relative overflow-hidden">
+    <div className="min-h-screen bg-white font-sans text-[#1F2937] relative overflow-hidden">
       {/* Background */}
       <div className="fixed inset-0 z-[-1] pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(91,94,247,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(91,94,247,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" />
-        <motion.div 
-          style={{ y: yBackground }}
-          className="absolute top-0 right-[-10%] w-[50%] h-[50%] rounded-full bg-[#5B5EF7]/5 blur-[120px]" 
-        />
-        <motion.div 
-          style={{ y: yBackground }}
-          className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-[#22D3EE]/5 blur-[120px]" 
-        />
+
+
       </div>
 
       {/* HERO SECTION */}
@@ -286,7 +279,7 @@ export default function VantorixOmsProductPage() {
 
       {/* FINAL CTA SECTION */}
       <section className="py-24 px-6 relative overflow-hidden bg-white border-t border-slate-200">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[400px] bg-gradient-to-r from-[#5B5EF7]/10 to-[#22D3EE]/10 rounded-full blur-[100px] pointer-events-none" />
+
         
         <div className="max-w-3xl mx-auto text-center relative z-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}>
