@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
-import OrderlyProductPage from './OrderlyProductPage';
+import VantorixOmsProductPage from './VantorixOmsProductPage';
 import { 
   ArrowRight, 
   Send,
@@ -37,7 +37,7 @@ const staggerContainer = {
 };
 
 export default function App() {
-  const [currentView, setCurrentView] = useState<'home' | 'products' | 'privacy' | 'terms' | 'product-orderly'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'products' | 'privacy' | 'terms' | 'product-oms'>('home');
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { scrollYProgress } = useScroll();
@@ -76,9 +76,11 @@ export default function App() {
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-[72px] flex items-center ${isScrolled ? "nav-blur shadow-sm border-b border-theme/50" : "bg-transparent"}`}>
         <div className="w-full max-w-7xl mx-auto px-6 flex items-center justify-between">
           <div onClick={() => setCurrentView('home')} className="flex items-center gap-2.5 cursor-pointer group">
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#5B5EF7] to-[#22D3EE] flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-[#5B5EF7]/20 transition-all duration-300 group-hover:scale-110">
-              V
-            </div>
+            <img 
+              src="https://drive.google.com/thumbnail?id=1lZiGAgwoT5xeHXe8ArgtUIak7ZaVg6FV&sz=w500" 
+              alt="Vantorix Logo" 
+              className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+            />
             <span className="font-bold text-xl tracking-tight text-theme-primary">Vantorix</span>
           </div>
           
@@ -153,20 +155,20 @@ export default function App() {
               transition={{ duration: 0.5 }}
             >
               <ProductsPage onViewProduct={(id) => {
-                if (id === 'orderly') {
-                  setCurrentView('product-orderly');
+                if (id === 'oms') {
+                  setCurrentView('product-oms');
                 }
               }} />
             </motion.div>
-          ) : currentView === 'product-orderly' ? (
+          ) : currentView === 'product-oms' ? (
              <motion.div
-              key="product-orderly"
+              key="product-oms"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -30 }}
               transition={{ duration: 0.5 }}
             >
-              <OrderlyProductPage />
+              <VantorixOmsProductPage />
             </motion.div>
           ) : currentView === 'privacy' ? (
              <motion.div
@@ -206,9 +208,9 @@ export default function App() {
               <div className="w-16 h-16 bg-slate-50 border border-theme text-[#5B5EF7] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
                 <Send className="w-7 h-7" />
               </div>
-              <h2 className="text-4xl md:text-5xl font-black text-theme-primary mb-6 tracking-tight leading-tight">Готовы к <span className="text-gradient">цифровой трансформации?</span></h2>
+              <h2 className="text-2xl sm:text-4xl md:text-5xl font-black text-theme-primary mb-6 tracking-tight leading-tight">Готовы к <br className="hidden sm:block" /><span className="text-gradient whitespace-nowrap">цифровой трансформации?</span></h2>
               <p className="text-theme-secondary mb-10 max-w-xl mx-auto text-lg leading-relaxed">
-                Оставьте заявку, чтобы обсудить внедрение наших продуктов или разработку индивидуального решения для вашего бизнеса.
+                Свяжитесь с нами, чтобы обсудить ваши бизнес-задачи и подобрать оптимальное решение из нашей экосистемы.
               </p>
 
               <div className="flex justify-center mt-4">
@@ -229,11 +231,8 @@ export default function App() {
               className="w-full bg-slate-50 border border-theme rounded-[2rem] p-10 md:p-16 relative overflow-hidden shadow-sm"
             >
               <div className="relative z-10 flex flex-col items-center justify-center text-center">
-                <div className="mb-6">
-                  <span className="text-[#5B5EF7] font-black text-sm tracking-[0.4em] uppercase">Vantorix Labs</span>
-                </div>
-                <h3 className="text-3xl md:text-5xl font-black text-theme-primary tracking-tight leading-tight mb-2">
-                  MAKE IT <span className="text-gradient">POSSIBLE</span>
+                <h3 className="text-3xl sm:text-4xl md:text-5xl font-black text-theme-primary tracking-tight leading-tight mb-2">
+                  MAKE IT <br className="hidden sm:block" /><span className="text-gradient whitespace-nowrap">POSSIBLE</span>
                 </h3>
               </div>
             </motion.div>
@@ -244,7 +243,11 @@ export default function App() {
       <footer className="py-12 bg-white border-t border-theme relative z-10">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-3">
-            <div className="w-7 h-7 bg-gradient-to-br from-[#5B5EF7] to-[#22D3EE] rounded flex items-center justify-center text-white font-bold text-xs">V</div>
+            <img 
+              src="https://drive.google.com/thumbnail?id=1lZiGAgwoT5xeHXe8ArgtUIak7ZaVg6FV&sz=w500" 
+              alt="Vantorix Logo" 
+              className="h-8 w-auto object-contain" 
+            />
             <span className="font-bold text-theme-primary text-xl tracking-tight">Vantorix</span>
           </div>
           <div className="text-sm text-theme-secondary flex flex-wrap justify-center gap-8">
@@ -264,18 +267,17 @@ export default function App() {
 function HomePage({ onViewProducts }: { onViewProducts: () => void }) {
   return (
     <>
-      <section className="relative pt-10 pb-20 md:pt-32 md:pb-32 px-6 flex items-center justify-center min-h-[90vh] overflow-hidden">
+      <section className="relative pt-10 pb-20 md:pt-24 md:pb-32 px-6 overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl h-[400px] bg-[#5B5EF7]/10 blur-[130px] rounded-full pointer-events-none" />
         
-        <div className="max-w-5xl mx-auto text-center relative z-10 w-full mt-10">
+        <div className="max-w-5xl mx-auto text-center relative z-10 w-full mt-10 md:mt-20">
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 40 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.05] mb-8 text-theme-primary">
-              Vantorix — Цифровые системы <br className="hidden lg:block"/>
-              <span className="text-gradient">для роста бизнеса.</span>
+            <h1 className="text-[2rem] leading-[1.1] sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tight mb-8 text-theme-primary">
+              Vantorix — Цифровые системы <br className="hidden sm:block" /><span className="text-gradient whitespace-nowrap">для роста бизнеса.</span>
             </h1>
           </motion.div>
           
@@ -404,13 +406,13 @@ function HomePage({ onViewProducts }: { onViewProducts: () => void }) {
 
 const productsData = [
   {
-    id: 'orderly',
-    name: 'Orderly',
+    id: 'oms',
+    name: 'Vantorix OMS',
     tag: 'Флагман',
     subtitle: 'A modern B2B client ordering system',
     shortDesc: 'Универсальная система заказов B2B для бизнеса и его клиентов.',
-    desc: 'Избавьтесь от ручной обработки заказов, хаоса в WhatsApp и Excel. Orderly обеспечивает централизованное управление, структурированный каталог и быстрый интерфейс связи бизнеса со своими клиентами.',
-    link: 'https://orderly-by-vantorix.vercel.app/',
+    desc: 'Избавьтесь от ручной обработки заказов, хаоса в WhatsApp и Excel. Vantorix OMS обеспечивает централизованное управление, структурированный каталог и быстрый интерфейс связи бизнеса со своими клиентами.',
+    link: 'https://vantorix-oms.vercel.app/',
     features: [
       { icon: <Users className="w-5 h-5 text-[#5B5EF7]" />, text: 'Приватный доступ клиентов (invite-система)' },
       { icon: <ShoppingBag className="w-5 h-5 text-[#5B5EF7]" />, text: 'Структурированный каталог товаров' },
@@ -439,7 +441,7 @@ function ProductCard({ product, onViewDetails }: { product: typeof productsData[
       <div className="p-8 md:p-12 flex flex-col md:flex-row gap-8 justify-between items-start md:items-center relative z-10">
         <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
           <div className="w-16 h-16 rounded-xl bg-slate-50 flex items-center justify-center shadow-sm shrink-0 border border-theme relative overflow-hidden">
-            <span className="font-bold text-2xl text-transparent bg-clip-text bg-gradient-to-r from-[#5B5EF7] to-[#22D3EE] relative z-10">{product.name.charAt(0)}</span>
+            <span className="font-bold text-2xl text-gradient whitespace-nowrap relative z-10">{product.name.charAt(0)}</span>
           </div>
           <div>
             <div className="mb-2">

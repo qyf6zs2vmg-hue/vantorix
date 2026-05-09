@@ -12,7 +12,7 @@ import {
   ListTodo
 } from 'lucide-react';
 
-export default function OrderlyProductPage() {
+export default function VantorixOmsProductPage() {
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -50,15 +50,15 @@ export default function OrderlyProductPage() {
             <div className="inline-flex items-center gap-2 bg-slate-100 text-[#5B5EF7] font-bold text-xs uppercase tracking-widest rounded-full px-4 py-1.5 mb-6 border border-[#5B5EF7]/20 shadow-sm">
               Vantorix Orders System
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#1F2937] tracking-tight mb-6 leading-[1.1]">
-              Хватит управлять заказами в <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#5B5EF7] to-[#22D3EE]">Telegram и WhatsApp.</span>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-[#1F2937] tracking-tight mb-6 leading-[1.1]">
+              Хватит управлять заказами в <br className="hidden sm:block" /><span className="text-gradient whitespace-nowrap">Telegram и WhatsApp.</span>
             </h1>
             <p className="text-xl text-[#4B5563] max-w-2xl mx-auto lg:mx-0 mb-10 leading-relaxed">
               Единая B2B система заказов для современных компаний. Автоматизируйте продажи, получайте заказы напрямую в CRM и избавьтесь от ручной работы.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
               <a 
-                href="https://vantorix-orders.vercel.app/" target="_blank" rel="noreferrer"
+                href="https://vantorix-oms.vercel.app/" target="_blank" rel="noreferrer"
                 className="btn btn-lg btn-primary w-full sm:w-auto"
               >
                 Перейти к платформе <ArrowRight className="w-5 h-5" />
@@ -111,7 +111,7 @@ export default function OrderlyProductPage() {
                     <span className="text-red-500 text-[10px] font-bold">ОШИБКИ & ХАОС</span>
                   </motion.div>
                 </div>
-                {/* Right side: Orderly */}
+                {/* Right side: Vantorix OMS */}
                 <div className="flex-1 p-4 flex flex-col gap-4 bg-white relative">
                   <div className="absolute top-2 left-2 text-[10px] uppercase font-bold text-[#5B5EF7] tracking-wider">After (Vantorix)</div>
                   
@@ -169,7 +169,7 @@ export default function OrderlyProductPage() {
               <LayoutDashboard className="w-7 h-7" />
             </div>
             <h2 className="text-3xl md:text-5xl font-black text-[#1F2937] mb-8">
-              Orderly централизует все B2B заказы в одной автоматизированной платформе.
+              Vantorix OMS централизует все B2B заказы в одной автоматизированной платформе.
             </h2>
           </motion.div>
 
@@ -218,7 +218,7 @@ export default function OrderlyProductPage() {
                 transition={{ delay: i * 0.15 }}
                 className="relative bg-white p-8 rounded-2xl border border-slate-200 shadow-sm"
               >
-                <div className="w-12 h-12 bg-gradient-to-br from-[#5B5EF7] to-[#22D3EE] text-white rounded-xl flex items-center justify-center font-bold text-xl mb-6 shadow-md shadow-[#5B5EF7]/20">
+                <div className="w-12 h-12 bg-gradient text-white rounded-xl flex items-center justify-center font-bold text-xl mb-6 shadow-md shadow-[#5B5EF7]/20">
                   {item.step}
                 </div>
                 <h3 className="text-lg font-bold text-[#1F2937] mb-2">{item.title}</h3>
@@ -290,15 +290,15 @@ export default function OrderlyProductPage() {
         
         <div className="max-w-3xl mx-auto text-center relative z-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}>
-            <h2 className="text-4xl md:text-6xl font-black text-[#1F2937] tracking-tight mb-6 leading-tight">
-              Обновите систему заказов <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#5B5EF7] to-[#22D3EE]">уже сегодня.</span>
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black text-[#1F2937] tracking-tight mb-6 leading-tight">
+              Обновите систему заказов <br className="hidden sm:block" /><span className="text-gradient whitespace-nowrap">уже сегодня.</span>
             </h2>
             <p className="text-xl text-[#4B5563] mb-10">
               Начните автоматизировать операции вашего бизнеса за считанные минуты.
             </p>
             
             <a 
-              href="https://vantorix-orders.vercel.app/" target="_blank" rel="noreferrer"
+              href="https://vantorix-oms.vercel.app/" target="_blank" rel="noreferrer"
               className="btn btn-lg btn-primary inline-flex animate-pulse shadow-xl shadow-[#5B5EF7]/20"
             >
               Перейти к платформе <ArrowRight className="w-5 h-5 ml-1" />

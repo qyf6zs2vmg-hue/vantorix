@@ -3,8 +3,8 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   
-  --color-bg: #F8FAFC;
-  --color-card: #FFFFFF;
+  --color-bg: #FFFFFF;
+  --color-card: #F8FAFC;
   --color-text-primary: #1F2937;
   --color-text-secondary: #4B5563;
   --color-border: #E2E8F0;
@@ -19,8 +19,8 @@
 }
 
 :root {
-  --bg: #F8FAFC;
-  --card: #FFFFFF;
+  --bg: #FFFFFF;
+  --card: #F8FAFC;
   --text-primary: #1F2937;
   --text-secondary: #4B5563;
   --border: #E2E8F0;
@@ -68,12 +68,16 @@ h1, h2, h3, h4, h5, h6 {
 .radius-card { border-radius: var(--radius-card); }
 .radius-ui { border-radius: var(--radius-ui); }
 
-/* Custom Gradient Text */
+/* Custom Gradients */
 .text-gradient {
   background: var(--gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.bg-gradient {
+  background: var(--gradient);
 }
 
 /* Custom Nav */
